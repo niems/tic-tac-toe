@@ -1,58 +1,61 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <sstream>
 using namespace std;
 
-
-struct boardPosition
-{
-	string position_val; 
-};
-
 void menu(); //
-void displayBoard(boardPosition pos); //displays the tic tac toe board
+void displayBoard( const vector<string> &board_positions ); //displays the tic tac toe board
+void boardInitialize( vector<string> &board_positions );
 
+string float_to_string(float f)
+{
+	std::stringstream stream;
 
+	stream << f;
+
+	return stream.str();
+}
 
 int main()
 {
-	boardPosition pos1;
-	pos1.position_val = "0";
+	vector<string> board_positions;
 
-	displayBoard( pos1 );
+	boardInitialize( board_positions );
+	displayBoard( board_positions );
 
 	system("pause");
 	return 0;
 }
 
-void displayBoard(boardPosition pos)
+void displayBoard( const vector<string> &board_positions )
 {
+	int pos = 0;
 
-	cout << endl << endl;
-
-	for(int i = 0; i < 60; i++)
-
-		
-		cout << "-";
-
-	cout << endl; //new row
-
-	for(int k = 0; k < 30; k++) //number of rows for board
+	for(int i = 0; i < 3; i++) //number of rows
 	{
-		for(int j = 0; j < 60; j++) //number of colums for board
+		cout << board_positions[ pos++ ] << " | " << board_positions[ pos++ ] << " | " << board_positions[ pos++ ] << endl;
+
+		if( i < 2 )
 		{
-			if(j == 0 || j == 59)
-				cout << "|";
+			for(int j = 0; j < 9; j++)
+			{
+				cout << "-";
+			}
 
-			else if(j % 20 == 0)
-				cout << "|";
-
-			else
-				cout << " ";
+			cout << endl;
 		}
-
-		cout << endl; //new row
 	}
 
 	cout << endl << endl;
+}
+
+void boardInitialize( vector<string> &board_positions )
+{
+	for(int i = 0; i < 9; i++)
+	{
+			board_positions.push_back( float_to_string(i) );
+	}
+
+	board_positions[0] = 'f';
 }
