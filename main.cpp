@@ -56,6 +56,4 @@ void boardInitialize( vector<string> &board_positions )
 	{
 			board_positions.push_back( float_to_string(i) );
 	}
-
-	board_positions[0] = 'f';
 }
